@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2024/12/29 21:48:11 by asajed           ###   ########.fr       */
+/*   Updated: 2024/12/30 15:11:10 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int ac, char **av)
 
 	i = 1;
 	if (ac <= 1)
-		return (ft_printf("Error"));	
+		return (0);	
 	stack_b = NULL;
 	stack_a = NULL;
 	while (av[i])
@@ -61,4 +61,10 @@ int	main(int ac, char **av)
 		ft_lstadd_back(&stack_a, num);
 		i++;
 	}
+	while (stack_a)
+	{
+		ft_printf("%d -> ", stack_a->num);
+		stack_a = stack_a->next;
+	}
+	ft_printf("NULL");
 }
