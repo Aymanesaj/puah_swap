@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2024/12/30 10:38:45 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/02 16:26:01 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void    rr(t_list **stack_a, t_list **stack_b);
 void    rra(t_list **stack_a);
 void    rrb(t_list **stack_b);
 void    rrr(t_list **stack_a, t_list **stack_b);
+int     ft_find_min(t_list *lst);
+int	ft_find_max(t_list *lst);
 
 #endif
