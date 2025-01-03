@@ -7,7 +7,7 @@ SRC = push_swap.c Src/ft_aatoi.c Src/ft_dstrlen.c ft_printf/ft_bonus_flags.c    
       ft_printf/ft_isdigit.c         ft_printf/ft_printf.c    ft_printf/ft_putnbr.c    ft_printf/ft_atoi.c   ft_printf/ft_handlestr.c \
       ft_printf/ft_strlen.c          ft_printf/ft_lenu.c      ft_printf/ft_strx.c      ft_printf/ft_specifier.c  ft_printf/ft_strchr.c \
       ft_printf/ft_positive.c        ft_printf/ft_checkdot.c  ft_printf/ft_gothrough.c  Src/swap.c   Src/push.c \
-      Src/rotate.c       Src/reverse_rotate.c   Src/find.c
+      Src/rotate.c       Src/reverse_rotate.c   Src/find.c Src/handle_err.c
 	  
 OBJ = $(SRC:.c=.o)
 

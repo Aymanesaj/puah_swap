@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/02 16:32:15 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/03 15:59:05 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,9 @@ void	ft_sort_three(t_list **n)
 void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 {
 	int		min;
-	int		max;
 	t_list	*tmp;
 
 	min = ft_find_min(*stack_a);
-	max = ft_find_max(*stack_a);
 	tmp = *stack_a;
 	while ((ft_listsize(*stack_a) > 3))
 	{
@@ -106,8 +104,6 @@ void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 		min = ft_find_min(*stack_a);
 		if (tmp->num == min)
 			pb(stack_b, stack_a);
-		// else if (tmp->num == max)
-		// 	ra(stack_a);
 		else if (tmp->next->num == min)
 		{
 			sa(*stack_a);
@@ -142,11 +138,12 @@ int	main(int ac, char **av)
 		ft_lstadd_back(&stack_a, num);
 		i++;
 	}
+	ft_check_double(stack_a);
 	ft_sort_low(&stack_a, &stack_b);
-	// while (stack_a)
-	// {
-	// 	ft_printf("%d -> ", stack_a->num);
-	// 	stack_a = stack_a->next;
-	// }
-	// ft_printf("NULL");
+	while (stack_a)
+	{
+		ft_printf("%d -> ", stack_a->num);
+		stack_a = stack_a->next;
+	}
+	ft_printf("NULL");
 }
