@@ -6,11 +6,13 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/03 15:59:05 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/05 18:58:04 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "ft_printf/libftprintf.h"
+#include <threads.h>
 
 t_list	*create_node(int num)
 {
@@ -120,26 +122,43 @@ void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 		pa(stack_a, stack_b);
 }
 
+void	ft_addsortlist(char **av, t_list	**stack_a, t_list	**stack_b, int i)
+{
+	int		num;
+
+	num = -1;
+	while (av[i])
+	{
+		if (ft_checkargs(av[i]) > 1)
+		{
+			ft_addsortlist(ft_split(av[i], ' '), stack_a, stack_b, 0);
+			if (ft_checkargs(av[i + 1]))
+				i++;
+			else
+			 	break;
+		}
+		else
+		{
+			num = ft_aatoi(av[i]);
+			ft_lstadd_back(stack_a, num);
+			i++;
+		}
+	}
+	ft_check_double(*stack_a);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	int		num;
-	int		i;
 
-	i = 1;
+	stack_a = NULL;
+	stack_b = NULL;
 	if (ac <= 1)
 		return (0);
-	stack_b = NULL;
-	stack_a = NULL;
-	while (av[i])
-	{
-		num = ft_aatoi(av[i]);
-		ft_lstadd_back(&stack_a, num);
-		i++;
-	}
-	ft_check_double(stack_a);
-	ft_sort_low(&stack_a, &stack_b);
+	ft_addsortlist(av,  &stack_a, &stack_b, 1);
+	if (ft_listsize(stack_a) <= 10)
+		ft_sort_low(&stack_a, &stack_b);
 	while (stack_a)
 	{
 		ft_printf("%d -> ", stack_a->num);

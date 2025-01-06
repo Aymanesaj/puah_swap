@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:50:12 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/03 16:03:05 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/05 18:10:10 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,22 @@ void ft_check_double(t_list *head)
         }
         head = head->next;
     }
+}
+
+int ft_checkargs(char *s)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    if (!s)
+        return (0);
+    while (s[i])
+    {
+        if (ft_isdigit(s[i]) && (s[i + 1] == ' ' || s[i + 1] == '\0'))
+			j++;
+        i++;
+    }
+    return (j);
 }
