@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/05 18:58:04 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/06 16:31:52 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	ft_sort_three(t_list **n)
 {
 	if (ft_is_sorted(*n))
 		return ;
+	else if ((*n)->num > (*n)->next->num && (*n)->num > (*n)->next->next->num)
+		ra(n);
 	else if ((*n)->num > (*n)->next->num)
 		sa(*n);
 	else if ((*n)->num < (*n)->next->num && (*n)->next->next->num < (*n)->num)
 		rra(n);
-	else if ((*n)->num > (*n)->next->num && (*n)->num > (*n)->next->next->num)
-		ra(n);
 	else if ((*n)->num < (*n)->next->num
 		&& (*n)->next->num > (*n)->next->next->num)
 	{
@@ -109,8 +109,6 @@ void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 		else if (tmp->next->num == min)
 		{
 			sa(*stack_a);
-			if (ft_is_sorted(*stack_a))
-				break ;
 			pb(stack_b, stack_a);
 		}
 		else
@@ -129,6 +127,8 @@ void	ft_addsortlist(char **av, t_list	**stack_a, t_list	**stack_b, int i)
 	num = -1;
 	while (av[i])
 	{
+		if (ft_checkargs(av[i]) <= 1)
+			handle_err(av[i]);
 		if (ft_checkargs(av[i]) > 1)
 		{
 			ft_addsortlist(ft_split(av[i], ' '), stack_a, stack_b, 0);
@@ -159,10 +159,10 @@ int	main(int ac, char **av)
 	ft_addsortlist(av,  &stack_a, &stack_b, 1);
 	if (ft_listsize(stack_a) <= 10)
 		ft_sort_low(&stack_a, &stack_b);
-	while (stack_a)
-	{
-		ft_printf("%d -> ", stack_a->num);
-		stack_a = stack_a->next;
-	}
-	ft_printf("NULL");
+	// while (stack_a)
+	// {
+	// 	ft_printf("%d -> ", stack_a->num);
+	// 	stack_a = stack_a->next;
+	// }
+	// ft_printf("NULL");
 }

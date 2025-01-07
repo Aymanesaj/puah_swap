@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:50:12 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/05 18:10:10 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/06 12:08:55 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,20 @@ int ft_checkargs(char *s)
         i++;
     }
     return (j);
+}
+
+void    handle_err(char *str)
+{
+    int j;
+
+    j = 0;
+    if ((str[j] == '+' || str[j] == '-') && str[j + 1] != '\0')
+        j++;
+    while (ft_isdigit(str[j]))
+        j++;
+    if (!ft_isdigit(str[j]) && str[j] != '\0')
+    {
+        ft_printf("Error");
+    	exit(1);
+    }
 }

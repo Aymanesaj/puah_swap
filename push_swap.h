@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/05 17:41:04 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/06 11:35:05 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void    ft_check_double(t_list *head);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 int     ft_checkargs(char *s);
+void    handle_err(char *str);
 
 #endif

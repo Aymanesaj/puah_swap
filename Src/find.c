@@ -3,12 +3,10 @@
 int	ft_find_min(t_list *lst)
 {
 	int min;
-	int index;
 
 	if (!lst)
 		return (-1);
 	min = lst->num;
-	index = 0;
 	lst = lst->next;
 	while (lst)
 	{
@@ -24,12 +22,10 @@ int	ft_find_min(t_list *lst)
 int	ft_find_max(t_list *lst)
 {
 	int max;
-	int index;
 
 	if (!lst)
 		return (-1);
 	max = lst->num;
-	index = 0;
 	lst = lst->next;
 	while (lst)
 	{

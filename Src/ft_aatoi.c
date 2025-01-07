@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 12:12:11 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/05 17:51:34 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/06 10:51:02 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ int	ft_aatoi(char *str)
 	{
 		len = len * 10 + (str[i] - '0');
 		i++;
-	}
-	if (!ft_isdigit(str[i]) && str[i] != '\0')
-	{
-		ft_printf("Error");
-		exit(1);
 	}
 	return (len * sign);
 }
