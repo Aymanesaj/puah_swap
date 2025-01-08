@@ -6,13 +6,12 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/06 16:31:52 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/08 10:46:59 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 #include "ft_printf/libftprintf.h"
-#include <threads.h>
+#include "push_swap.h"
 
 t_list	*create_node(int num)
 {
@@ -37,21 +36,6 @@ int	ft_is_sorted(t_list *head)
 		head = head->next;
 	}
 	return (1);
-}
-
-int	ft_listsize(t_list *lst)
-{
-	int	i;
-
-	i = 0;
-	if (!lst)
-		return (0);
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
 }
 
 void	ft_lstadd_back(t_list **lst, int num)
@@ -84,7 +68,7 @@ void	ft_sort_three(t_list **n)
 	else if ((*n)->num < (*n)->next->num && (*n)->next->next->num < (*n)->num)
 		rra(n);
 	else if ((*n)->num < (*n)->next->num
-		&& (*n)->next->num > (*n)->next->next->num)
+			&& (*n)->next->num > (*n)->next->next->num)
 	{
 		sa(*n);
 		ra(n);
@@ -98,7 +82,7 @@ void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 
 	min = ft_find_min(*stack_a);
 	tmp = *stack_a;
-	while ((ft_listsize(*stack_a) > 3))
+	while ((ft_lstsize(*stack_a) > 3))
 	{
 		if (ft_is_sorted(*stack_a))
 			break ;
@@ -112,17 +96,19 @@ void	ft_sort_low(t_list **stack_a, t_list **stack_b)
 			pb(stack_b, stack_a);
 		}
 		else
-		 	rra(stack_a);
+			rra(stack_a);
 	}
+	if ((ft_lstsize(*stack_a) == 2) && !ft_is_sorted(*stack_a))
+		sa(*stack_a);
 	while (!ft_is_sorted(*stack_a))
 		ft_sort_three(stack_a);
-	while (ft_listsize(*stack_b))
+	while (ft_lstsize(*stack_b))
 		pa(stack_a, stack_b);
 }
 
-void	ft_addsortlist(char **av, t_list	**stack_a, t_list	**stack_b, int i)
+void	ft_addsortlist(char **av, t_list **stack_a, t_list **stack_b, int i)
 {
-	int		num;
+	int	num;
 
 	num = -1;
 	while (av[i])
@@ -135,7 +121,7 @@ void	ft_addsortlist(char **av, t_list	**stack_a, t_list	**stack_b, int i)
 			if (ft_checkargs(av[i + 1]))
 				i++;
 			else
-			 	break;
+				break ;
 		}
 		else
 		{
@@ -151,18 +137,37 @@ int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	t_list	*sorted;
 
 	stack_a = NULL;
 	stack_b = NULL;
 	if (ac <= 1)
 		return (0);
-	ft_addsortlist(av,  &stack_a, &stack_b, 1);
-	if (ft_listsize(stack_a) <= 10)
+	ft_addsortlist(av, &stack_a, &stack_b, 1);
+	sorted = sortedstack(&stack_a);
+	while (ft_lstsize(sorted))
+		sort_chunk(&stack_a, &stack_b, 6, &sorted);
+	if (ft_lstsize(stack_a) <= 5)
 		ft_sort_low(&stack_a, &stack_b);
-	// while (stack_a)
-	// {
-	// 	ft_printf("%d -> ", stack_a->num);
-	// 	stack_a = stack_a->next;
-	// }
-	// ft_printf("NULL");
+	ft_printf("sorted : ");
+	while (sorted)
+	{
+		ft_printf("%d -> ", sorted->num);
+		sorted = sorted->next;
+	}
+	ft_printf("NULL\n");
+	ft_printf("stack a : ");
+	while (stack_a)
+	{
+		ft_printf("%d -> ", stack_a->num);
+		stack_a = stack_a->next;
+	}
+	ft_printf("NULL\n");
+	ft_printf("stack b : ");
+	while (stack_b)
+	{
+		ft_printf("%d -> ", stack_b->num);
+		stack_b = stack_b->next;
+	}
+	ft_printf("NULL");
 }

@@ -33,15 +33,15 @@ void	*ft_calloc(size_t count, size_t size)
 	s = malloc(count * size);
 	if (s == NULL)
 		return (NULL);
-	ft_bzero (s, count * size);
+	ft_bzero(s, count * size);
 	return (s);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*v;
-	size_t	s_len;
-	size_t	i;
+	char *v;
+	size_t s_len;
+	size_t i;
 
 	if (!s)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/06 11:35:05 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/07 18:35:59 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 int     ft_checkargs(char *s);
 void    handle_err(char *str);
+void	ft_swap(t_list *stack);
+int     ft_lstsize(t_list *lst);
+void	ft_lstadd_back(t_list **lst, int num);
+t_list	*create_node(int num);
+void    sort_chunk(t_list **stack_a, t_list **stack_b, int chunk_size, t_list **sorted);
+void	ft_sort_low(t_list **stack_a, t_list **stack_b);
+t_list    *sortedstack(t_list **stack_a);
 
 #endif

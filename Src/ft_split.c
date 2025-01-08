@@ -39,7 +39,7 @@ void	ft_free(char **strs, int j)
 		free(strs[j]);
 		j--;
 	}
-	free (strs);
+	free(strs);
 }
 
 int	ft_ft(char **strs, char const *s, char c, int j)
@@ -72,9 +72,9 @@ int	ft_ft(char **strs, char const *s, char c, int j)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**strs;
-	int		i;
-	int		j;
+	char **strs;
+	int i;
+	int j;
 
 	if (s == NULL)
 		return (NULL);
