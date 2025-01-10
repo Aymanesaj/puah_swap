@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/09 18:42:48 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/10 23:14:11 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ int     in_the_chunk(int num, t_list *stack, int chunk_size);
 int     ft_find_from_last(t_list *stack_a, t_list *sorted, int chunk_size);
 int     ft_index(t_list *lst, int min);
 int     find_optimal_hold(t_list *stack_a, t_list *sorted, int chunk_size, int stack_size);
+int     closest_to(int index_first, int index_second, int size);
+int     ft_find_from_start(t_list *current, t_list *sorted, int index_first,
+		int chunk_size);
+void    print_list(t_list *head);
 
 #endif

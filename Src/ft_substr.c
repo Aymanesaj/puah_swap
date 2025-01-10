@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:01:50 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/04 18:10:53 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/10 11:41:43 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	*ft_calloc(size_t count, size_t size)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *v;
-	size_t s_len;
-	size_t i;
+	char	*v;
+	size_t	s_len;
+	size_t	i;
 
 	if (!s)
 		return (NULL);

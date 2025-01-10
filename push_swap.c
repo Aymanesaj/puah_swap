@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/09 18:05:36 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/10 23:00:41 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void	ft_sort_three(t_list **n)
 	{
 		if (ft_is_sorted(*n))
 			return ;
-		else if ((*n)->num > (*n)->next->num && (*n)->num > (*n)->next->next->num)
+		else if ((*n)->num > (*n)->next->num
+				&& (*n)->num > (*n)->next->next->num)
 			ra(n);
 		else if ((*n)->num > (*n)->next->num)
 			sa(*n);
-		else if ((*n)->num < (*n)->next->num && (*n)->next->next->num < (*n)->num)
+		else if ((*n)->num < (*n)->next->num
+				&& (*n)->next->next->num < (*n)->num)
 			rra(n);
 		else if ((*n)->num < (*n)->next->num
 				&& (*n)->next->num > (*n)->next->next->num)

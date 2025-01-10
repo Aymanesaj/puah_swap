@@ -26,15 +26,15 @@ int	check_argprint(char c, va_list lst, const char *str, int *i)
 		return ((ft_putchar('%')));
 	else if (c == 'p')
 		return ((ft_address(va_arg(lst, unsigned long long),
-					"0123456789abcdef")));
+							"0123456789abcdef")));
 	else if (c == 'x')
 		return ((ft_putnbr_base(va_arg(lst, unsigned int),
-					"0123456789abcdef")));
+								"0123456789abcdef")));
 	else if (c == 'X')
 		return ((ft_putnbr_base(va_arg(lst, unsigned int),
-					"0123456789ABCDEF")));
+								"0123456789ABCDEF")));
 	else if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '.'
-		|| c == '0' || ft_isdigit(c))
+			|| c == '0' || ft_isdigit(c))
 		return ((bonus_flags(str, lst, i)));
 	return (-1);
 }
