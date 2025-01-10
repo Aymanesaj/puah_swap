@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:33:17 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/08 10:46:59 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/09 18:05:36 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,22 @@ void	ft_lstadd_back(t_list **lst, int num)
 
 void	ft_sort_three(t_list **n)
 {
-	if (ft_is_sorted(*n))
-		return ;
-	else if ((*n)->num > (*n)->next->num && (*n)->num > (*n)->next->next->num)
-		ra(n);
-	else if ((*n)->num > (*n)->next->num)
-		sa(*n);
-	else if ((*n)->num < (*n)->next->num && (*n)->next->next->num < (*n)->num)
-		rra(n);
-	else if ((*n)->num < (*n)->next->num
-			&& (*n)->next->num > (*n)->next->next->num)
+	while (!ft_is_sorted(*n) && ft_lstsize(*n) == 3)
 	{
-		sa(*n);
-		ra(n);
+		if (ft_is_sorted(*n))
+			return ;
+		else if ((*n)->num > (*n)->next->num && (*n)->num > (*n)->next->next->num)
+			ra(n);
+		else if ((*n)->num > (*n)->next->num)
+			sa(*n);
+		else if ((*n)->num < (*n)->next->num && (*n)->next->next->num < (*n)->num)
+			rra(n);
+		else if ((*n)->num < (*n)->next->num
+				&& (*n)->next->num > (*n)->next->next->num)
+		{
+			sa(*n);
+			ra(n);
+		}
 	}
 }
 
@@ -133,6 +136,21 @@ void	ft_addsortlist(char **av, t_list **stack_a, t_list **stack_b, int i)
 	ft_check_double(*stack_a);
 }
 
+void	print_list(t_list *head)
+{
+	if (!head)
+	{
+		ft_printf("List is empty\n");
+		return ;
+	}
+	while (head)
+	{
+		ft_printf("%d ->", head->num);
+		head = head->next;
+	}
+	ft_printf("NULL\n");
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
@@ -146,28 +164,6 @@ int	main(int ac, char **av)
 	ft_addsortlist(av, &stack_a, &stack_b, 1);
 	sorted = sortedstack(&stack_a);
 	while (ft_lstsize(sorted))
-		sort_chunk(&stack_a, &stack_b, 6, &sorted);
-	if (ft_lstsize(stack_a) <= 5)
-		ft_sort_low(&stack_a, &stack_b);
-	ft_printf("sorted : ");
-	while (sorted)
-	{
-		ft_printf("%d -> ", sorted->num);
-		sorted = sorted->next;
-	}
-	ft_printf("NULL\n");
-	ft_printf("stack a : ");
-	while (stack_a)
-	{
-		ft_printf("%d -> ", stack_a->num);
-		stack_a = stack_a->next;
-	}
-	ft_printf("NULL\n");
-	ft_printf("stack b : ");
-	while (stack_b)
-	{
-		ft_printf("%d -> ", stack_b->num);
-		stack_b = stack_b->next;
-	}
-	ft_printf("NULL");
+		sort_with_chunks(&stack_a, &stack_b, ft_chunk_size(stack_a), &sorted);
+	// ft_sort_low(&stack_a, &stack_b);
 }

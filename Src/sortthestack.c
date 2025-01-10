@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:20:54 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/08 10:46:29 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/10 11:38:09 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int     in_the_chunk(int num, t_list *stack, int chunk_size)
     i = 0;
     while (stack && i < chunk_size)
     {
-        if (stack->num == num)
+        if (stack->num <= num)
             return (1);
         stack = stack->next;
         i++;
@@ -87,22 +87,10 @@ int     in_the_chunk(int num, t_list *stack, int chunk_size)
     return (0);
 }
 
-int     position(t_list *stack, t_list *sorted, int chunk_size)
-{
-    int i;
-
-    i = 0;
-    while (!in_the_chunk(stack->num, sorted, chunk_size))
-    {
-        stack = stack->next;
-        i++;
-    }
-    return (i);
-}
 int	ft_b_is_sorted(t_list *head)
 {
 	if (!head)
-		return (-1);
+		return (1);
 	while (head->next)
 	{
 		if (head->num < head->next->num)
@@ -131,11 +119,11 @@ void    ft_sort_b(t_list **n)
             rb(n);
         }
     }
-    else if (ft_lstsize(*n) == 2)
+    else if (ft_lstsize(*n) == 2 && !ft_b_is_sorted(*n))
         sb(*n);
 }
 
-int	ft_min_index(t_list *lst, int min)
+int	ft_index(t_list *lst, int min)
 {
 	int	i;
 
@@ -152,50 +140,91 @@ int	ft_min_index(t_list *lst, int min)
 	return (i);
 }
 
-void    sort_chunk(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list **sorted)
+void    both_at_the_same_time(t_list **stack_a, t_list **stack_b, int min_in_a)
 {
-    int     size;
-    int     pos;
-    int     i;
-    int     min_index;
+    int max_in_b;
 
-    i = 0;
-    pos = position(*stack_a, *sorted, chunk_size);
-    while (i <= chunk_size && ft_lstsize(*stack_a) >= 6)
+    if (!stack_a || !stack_b)
+        return ;
+    max_in_b = ft_index(*stack_b, ft_find_max(*stack_b));
+    if (max_in_b >= (ft_lstsize(*stack_b) / 2) && min_in_a >= (ft_lstsize(*stack_a) / 2))
+        rrr(stack_a, stack_b);
+    else if (max_in_b < (ft_lstsize(*stack_b) / 2) && min_in_a < (ft_lstsize(*stack_a) / 2))
+        rr(stack_a, stack_b);
+    if (max_in_b == 1 && min_in_a == 1)
+        ss(*stack_a, *stack_b);
+}
+
+void    push_back(t_list **stack_b, t_list **stack_a)
+{
+    int max_index;
+
+    while (ft_lstsize(*stack_b))
     {
-        min_index = ft_min_index(*stack_a, ft_find_min(*sorted));
+        max_index = ft_index(*stack_b, ft_find_max(*stack_b));
+        if (max_index == 0)
+            pa(stack_a, stack_b);
+        else if (max_index == 1)
+            sb(*stack_b);
+        else if (ft_lstsize(*stack_b) <= 3)
+        {
+            while (ft_lstsize(*stack_b) == 3)
+                ft_sort_b(stack_b);
+        }
+        else if (max_index >= (ft_lstsize(*stack_b) / 2))
+            rrb(stack_b);
+        else
+            rb(stack_b);
+    }
+}
+
+int sort_chunk(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list **sorted)
+{
+    int pos;
+    int size;
+
+    while (sorted && ft_lstsize(*stack_a))
+    {
         size = ft_lstsize(*stack_a);
-        pos = position(*stack_a, *sorted, chunk_size);
+        pos = find_optimal_hold(*stack_a, *sorted, chunk_size, size);
         if (pos == 0)
+        {
             pb(stack_b, stack_a);
+            return (find_optimal_hold(*stack_a, *sorted, chunk_size, size));
+        }
         else if (pos == 1)
         {
             sa(*stack_a);
             pb(stack_b, stack_a);
+            return (find_optimal_hold(*stack_a, *sorted, chunk_size, size));
         }
-        else if (pos > (size / 2) || min_index == size - 1 || min_index == size - 2)
-        {
-            while (!in_the_chunk((*stack_a)->num, *sorted, chunk_size))
-                rra(stack_a);
-        }
+        else if (pos > (size / 2))
+            rra(stack_a);
         else if (pos <= (size / 2))
-        {
-            while (!in_the_chunk((*stack_a)->num, *sorted, chunk_size))
-                ra(stack_a);
-        }
-        ft_sort_b(stack_b);
-        i++;
+            ra(stack_a);
     }
-    while(!ft_b_is_sorted(*stack_b))
-        ft_sort_b(stack_b);
-    if (ft_lstsize(*stack_a) <= chunk_size)
+    return (pos);
+}
+
+void    sort_with_chunks(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list **sorted)
+{
+    int     i;
+    int     pos;
+
+    i = chunk_size;
+    while (sorted && i && ft_lstsize(*stack_a))
     {
-        ft_sort_low(stack_a, stack_b);
+        pos = sort_chunk(stack_a, stack_b, chunk_size, sorted);
+        both_at_the_same_time(stack_a, stack_b, pos);
+        ft_sort_b(stack_b);
+        i--;
+    }
+    if (ft_lstsize(*stack_a) <= 3)
+    {
+        ft_sort_three(stack_a);
         ft_remove(sorted, ft_lstsize(*sorted));
-        free(sorted);
-        while (ft_lstsize(*stack_b))
-            pa(stack_a, stack_b);
-        return;
+        push_back(stack_b, stack_a);
+        return ;
     }
     ft_remove(sorted, chunk_size);
 }

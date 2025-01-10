@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/07 18:35:59 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/09 18:42:48 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,14 @@ void	ft_swap(t_list *stack);
 int     ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, int num);
 t_list	*create_node(int num);
-void    sort_chunk(t_list **stack_a, t_list **stack_b, int chunk_size, t_list **sorted);
+void    sort_with_chunks(t_list **stack_a, t_list **stack_b, int chunk_size, t_list **sorted);
 void	ft_sort_low(t_list **stack_a, t_list **stack_b);
 t_list    *sortedstack(t_list **stack_a);
+int     ft_chunk_size(t_list *stack);
+void	ft_sort_three(t_list **n);
+int     in_the_chunk(int num, t_list *stack, int chunk_size);
+int     ft_find_from_last(t_list *stack_a, t_list *sorted, int chunk_size);
+int     ft_index(t_list *lst, int min);
+int     find_optimal_hold(t_list *stack_a, t_list *sorted, int chunk_size, int stack_size);
 
 #endif
