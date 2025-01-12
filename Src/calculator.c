@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:03:00 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/10 23:32:01 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 17:05:11 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	closest_to(int index_first, int index_second, int size)
 {
 	int	from_min = index_first;
-	int	from_max = size - index_second;
+	int	from_max = size - index_second + 1;
 
 	if (index_first < 0)
 		return (index_second);
@@ -27,7 +27,6 @@ int	closest_to(int index_first, int index_second, int size)
 		return (index_second);
 }
 
-
 int	ft_chunk_size(t_list *stack)
 {
 	int	size;
@@ -37,7 +36,7 @@ int	ft_chunk_size(t_list *stack)
 		return (0);
 	size = ft_lstsize(stack);
 	if (size >= 500)
-		chunk_size = size / 12;
+		chunk_size = size / 11;
 	else if (size >= 100)
 		chunk_size = size / 5;
 	else

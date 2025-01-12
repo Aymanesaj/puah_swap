@@ -6,30 +6,12 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:20:54 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/10 23:36:07 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 22:18:35 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <stdlib.h>
-
-void    ft_remove(t_list **list, int index)
-{
-    t_list *tmp;
-    t_list *next;
-
-    if (!list || !(*list) || index < 0)
-        return ;
-    tmp = *list;
-    while (tmp && index--)
-    {
-        next = tmp->next;
-        free(tmp);
-        tmp = next;
-    }
-    *list = tmp;
-}
-
 
 void	sort_list(t_list **head)
 {
@@ -144,7 +126,7 @@ void    both_at_the_same_time(t_list **stack_a, t_list **stack_b, int min_in_a)
 {
     int max_in_b;
 
-    if (!stack_a || !stack_b || !*stack_a || !*stack_b)
+    if (!stack_a || !stack_b)
         return ;
     max_in_b = ft_index(*stack_b, ft_find_max(*stack_b));
     if (max_in_b >= (ft_lstsize(*stack_b) / 2) && min_in_a >= (ft_lstsize(*stack_a) / 2))
@@ -158,6 +140,7 @@ void    both_at_the_same_time(t_list **stack_a, t_list **stack_b, int min_in_a)
 void    push_back(t_list **stack_b, t_list **stack_a)
 {
     int max_index;
+    
 
     while (ft_lstsize(*stack_b))
     {
@@ -168,8 +151,8 @@ void    push_back(t_list **stack_b, t_list **stack_a)
             sb(*stack_b);
         else if (ft_lstsize(*stack_b) <= 3)
         {
-            while (!ft_b_is_sorted(*stack_b))
-                ft_sort_b(stack_b);
+            // while (!ft_b_is_sorted(*stack_b))
+            ft_sort_b(stack_b);
         }
         else if (max_index >= (ft_lstsize(*stack_b) / 2))
             rrb(stack_b);
@@ -190,12 +173,16 @@ void    sort_chunk(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list *
         if (pos == 0)
         {
             pb(stack_b, stack_a);
+            if (ft_lstsize(*stack_b) > 1 && (*stack_b)->num < (*stack_b)->next->num)
+                rb(stack_b);
             return ;
         }
         else if (pos == 1)
         {
             sa(*stack_a);
             pb(stack_b, stack_a);
+            if (ft_lstsize(*stack_b) > 1 && (*stack_b)->num < (*stack_b)->next->num)
+                rb(stack_b);
             return ;
         }
         else if (pos <= size / 2)
@@ -210,7 +197,6 @@ void    sort_chunk(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list *
                 rra(stack_a);
         }
     }
-    return ;
 }
 
 void    sort_with_chunks(t_list **stack_a, t_list **stack_b, int  chunk_size, t_list **sorted)

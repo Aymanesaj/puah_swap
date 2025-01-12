@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:18:06 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/05 17:48:52 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 18:21:38 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	countword(char const *s, char c)
 	return (j);
 }
 
-void	ft_free(char **strs, int j)
+static	void	ft_free(char **strs, int j)
 {
 	while (j >= 0)
 	{

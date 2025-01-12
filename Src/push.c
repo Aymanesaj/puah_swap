@@ -6,16 +6,11 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 21:24:34 by asajed            #+#    #+#             */
-/*   Updated: 2024/12/30 15:09:20 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 15:54:05 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-// go to last node - 1
-// tmp = last node
-// last node - 1 next == null
-// last node in stack b next == tmp
 
 int	ft_lstsize(t_list *lst)
 {
@@ -29,11 +24,6 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
-
-// tmp == stack a's head
-// stack a head == tmp's next
-// stack b's last next == tmp
-// tmp next == null
 
 void	ft_push(t_list **dest, t_list **src)
 {

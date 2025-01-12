@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:57:35 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/10 23:14:11 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 21:16:35 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ void    rrb(t_list **stack_b);
 void    rrr(t_list **stack_a, t_list **stack_b);
 int     ft_find_min(t_list *lst);
 int	    ft_find_max(t_list *lst);
-void    ft_check_double(t_list *head);
+void    ft_check_double(t_list **stack_a);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 int     ft_checkargs(char *s);
-void    handle_err(char *str);
 void	ft_swap(t_list *stack);
 int     ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, int num);
@@ -59,5 +58,11 @@ int     closest_to(int index_first, int index_second, int size);
 int     ft_find_from_start(t_list *current, t_list *sorted, int index_first,
 		int chunk_size);
 void    print_list(t_list *head);
+void    insert(t_list **stack_a, t_list **stack_b);
+void	ft_addsortlist(char **av, t_list **stack_a, int i, int j);
+int     ft_is_sorted(t_list *head);
+void    ft_remove(t_list **list, int index);
+void	handle_err(char *str, t_list **stack_a);
+void    ft_clean_and_free(t_list **stack_a, t_list **stack_b);
 
 #endif

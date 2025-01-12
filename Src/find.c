@@ -6,7 +6,7 @@
 /*   By: asajed <asajed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:21:18 by asajed            #+#    #+#             */
-/*   Updated: 2025/01/10 23:14:03 by asajed           ###   ########.fr       */
+/*   Updated: 2025/01/11 20:15:05 by asajed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ int	ft_find_from_last(t_list *stack_a, t_list *sorted, int chunk_size)
 int	ft_find_from_start(t_list *current, t_list *sorted, int index_first,
 		int chunk_size)
 {
-	int		j;
 
 	index_first = 0;
-	j = 0;
 	while (!in_the_chunk(current->num, sorted, chunk_size))
 	{
 		current = current->next;
